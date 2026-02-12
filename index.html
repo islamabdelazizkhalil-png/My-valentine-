@@ -5,23 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Jerry ❤️</title>
     <style>
-        * { -webkit-tap-highlight-color: transparent; }
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
         body { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             height: 100vh; margin: 0; background-color: #ffeef2; 
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='12' fill='%23ffccd5' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30, 50, 50)'%3EJerry%3C/text%3E%3C/svg%3E");
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Improved Watermark: No-Wrap SVG */
+            background-image: url("data:image/svg+xml,%3Csvg width='150' height='100' viewBox='0 0 150 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='14' fill='%23ffccd5' font-family='sans-serif' text-anchor='middle' white-space='nowrap' transform='rotate(-30, 75, 50)'%3EJerry%3C/text%3E%3C/svg%3E");
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow: hidden; text-align: center; touch-action: none;
         }
-        .gif { width: 180px; margin-bottom: 10px; border-radius: 20px; box-shadow: 0 10px 25px rgba(214, 51, 132, 0.15); }
-        h1 { color: #d63384; font-size: 1.6rem; padding: 0 30px; margin-top: 10px; }
-        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; width: 100%; position: relative; height: 120px; margin-top: 20px; }
-        #yesBtn { background-color: #28a745; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; z-index: 999; cursor: pointer; transition: all 0.2s; }
-        #noBtn { background-color: #dc3545; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; position: absolute; transition: 0.15s ease-out; touch-action: none; z-index: 1000; }
+        .gif { width: 200px; max-width: 80%; margin-bottom: 10px; border-radius: 20px; }
+        
+        /* Ensures the question doesn't wrap awkwardly */
+        h1 { 
+            color: #d63384; 
+            font-size: 1.6rem; 
+            padding: 0 20px; 
+            white-space: normal; 
+            word-break: keep-all;
+        }
+
+        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; width: 100%; position: relative; height: 150px; }
+        #yesBtn { background-color: #28a745; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; z-index: 999; cursor: pointer; }
+        #noBtn { background-color: #dc3545; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; position: absolute; transition: 0.1s ease-out; touch-action: none; z-index: 1000; }
     </style>
 </head>
 <body>
-    <img class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/K97pSdtfXSgjAsuSIn/giphy.gif">
+    <img class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzN4bmFubXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6eXp6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/3o7TKL96yR04zK9Nn2/giphy.gif">
     <h1>Jerry will you be my valentine? ❤️</h1>
     <div class="buttons">
         <button id="yesBtn" onclick="nextPage()">Yes</button>
@@ -32,22 +42,15 @@
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
-            const padding = 50;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-            noBtn.style.left = Math.max(padding, x) + 'px';
-            noBtn.style.top = Math.max(padding, y) + 'px';
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
             let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = (currentSize + 15) + 'px';
             yesBtn.style.padding = (currentSize * 0.7) + 'px ' + (currentSize * 1.3) + 'px';
         }
         function nextPage() {
             document.body.innerHTML = `
-                <img class="gif" src="https://media.giphy.com/media/UMon0WU1m6pRm/giphy.gif">
-                <h1 style="color: #d63384;">I knew you'd say yes, Jerry! ❤️</h1>
-            `;
-            document.body.style.backgroundColor = "#ffc1d6";
-        }
-    </script>
-</body>
-</html>
+                <img class="gif" src="
+                
