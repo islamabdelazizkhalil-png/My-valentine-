@@ -19,117 +19,89 @@
         .container {
             text-align: center;
             background: white;
-            padding: 40px;
-            border-radius: 30px;
+            padding: 30px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 400px;
-            width: 85%;
+            width: 90%;
             z-index: 10;
         }
-        .icon {
-            font-size: 80px;
+        img {
+            width: 200px;
+            height: auto;
             margin-bottom: 20px;
-            display: block;
         }
         h1 {
-            color: #ff4b6e;
+            color: #d81b60;
             font-size: 1.5rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
-        .btn-group {
+        .buttons {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-            min-height: 150px; /* Space for the growing button */
+            min-height: 100px;
         }
         button {
-            padding: 15px 30px;
-            font-size: 1.1rem;
+            padding: 12px 25px;
+            font-size: 1rem;
             font-weight: bold;
             border: none;
-            border-radius: 15px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s;
         }
-        #yesBtn {
-            background-color: #4CAF50;
-            color: white;
-            z-index: 100;
-        }
-        #noBtn {
-            background-color: #ff4b6e;
-            color: white;
-            position: relative;
-        }
-        .celebrate {
-            font-size: 2rem;
-            color: #d81b60;
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        #yesBtn { background-color: #4caf50; color: white; }
+        #noBtn { background-color: #f44336; color: white; position: relative; }
     </style>
 </head>
 <body>
 
     <div class="container" id="main-card">
-        <span id="emoji" class="icon">🥺</span>
+        <img id="status-gif" src="https://media.tenor.com/iz2_S_5r77EAAAAi/milk-and-mocha-bear.gif" alt="Cute Bears">
         <h1 id="question">Jerry, will you be my Valentine?</h1>
-        <div class="btn-group" id="btn-container">
+        <div class="buttons" id="btn-container">
             <button id="yesBtn">Yes</button>
             <button id="noBtn">No</button>
         </div>
     </div>
 
     <script>
-        const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const emoji = document.getElementById('emoji');
+        const yesBtn = document.getElementById('yesBtn');
+        const gif = document.getElementById('status-gif');
         const container = document.getElementById('main-card');
 
         let noCount = 0;
-        const phrases = [
-            "No", 
-            "Are you sure?", 
-            "Jerry, please!", 
-            "Don't do this to me", 
-            "I'm gonna cry...", 
-            "Last chance!", 
-            "You're heartless! 💔"
-        ];
+        const phrases = ["No", "Are you sure?", "Really sure?", "Jerry, please!", "Think again!", "You're breaking my heart!", "I'm gonna cry...", "Okay, last chance!"];
 
         noBtn.addEventListener('click', () => {
             noCount++;
-            
-            // Update Emoji based on rejection level
-            if (noCount > 2) emoji.innerText = "😭";
-            if (noCount > 5) emoji.innerText = "🥀";
-
-            // Update text
             noBtn.innerText = phrases[Math.min(noCount, phrases.length - 1)];
             
-            // Make Yes button grow massive
-            const scale = 1 + (noCount * 0.6);
-            yesBtn.style.transform = `scale(${scale})`;
+            // Make Yes button grow
+            const size = 1 + (noCount * 0.6);
+            yesBtn.style.transform = `scale(${size})`;
             
-            // Teleport the No button
-            const x = Math.random() * (window.innerWidth - 150) - (window.innerWidth / 2);
-            const y = Math.random() * (window.innerHeight - 150) - (window.innerHeight / 2);
+            // Move No button randomly across the whole screen
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
             noBtn.style.position = 'fixed';
-            noBtn.style.left = `calc(50% + ${x}px)`;
-            noBtn.style.top = `calc(50% + ${y}px)`;
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            // Change to sad GIF after a few clicks
+            if (noCount === 3) {
+                gif.src = "https://media.tenor.com/T_SbeX-9_YAAAAAi/cry-mocha.gif";
+            }
         });
 
         yesBtn.addEventListener('click', () => {
-            document.body.style.backgroundColor = "#ffde59";
+            document.body.style.background = "#ffde59";
             container.innerHTML = `
-                <span class="icon">💖</span>
-                <h1 class="celebrate">That's the best decision you ever made, Jerry!</h1>
-                <p>Love you! 🧸</p>
+                <img src="https://media.tenor.com/86D12y8C39AAAAAi/milk-and-mocha.gif">
+                <h1 style="font-size: 1.8rem; color: #d81b60;">That's the best decision you ever made, Jerry! ❤️</h1>
             `;
         });
     </script>
