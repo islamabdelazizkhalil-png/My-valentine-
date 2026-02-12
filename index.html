@@ -1,14 +1,4 @@
-    let clickCount = 0;
-    const noMessages = [
-        "No", "Are you sure?", "Really sure?", "Pookie please", 
-        "Think again!", "Last chance!", "Surely not?", "You're heartless!"
-    ];
-
-    noBtn.addEventListener('click', () => {
-        clickCount++;
-        
-        // Change text
-        noBtn.innerText = noMessages[Math.min(clickCount, noMessages.length - 1)];<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,106 +11,86 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #fff0f3;
-            font-family: 'Arial', sans-serif;
+            background-color: #ffeef2;
+            font-family: 'sans-serif';
             overflow: hidden;
-            transition: background 0.5s ease;
         }
-        .container {
-            text-align: center;
+        .card {
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
             max-width: 400px;
             width: 90%;
             z-index: 10;
         }
         img {
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
-            margin-bottom: 20px;
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
         }
         h1 {
-            color: #d81b60;
+            color: #d63384;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
-        .buttons {
+        .btn-group {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 20px;
-            min-height: 100px;
+            gap: 15px;
+            position: relative;
+            min-height: 60px;
         }
         button {
-            padding: 12px 25px;
+            padding: 10px 25px;
             font-size: 1rem;
             font-weight: bold;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: 0.2s;
         }
-        #yesBtn { background-color: #4caf50; color: white; }
-        #noBtn { background-color: #f44336; color: white; position: relative; }
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+        }
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+            position: relative;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-card">
-        <img id="status-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3eHh5eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L4lvBzev60_U8/giphy.gif" alt="Cute Bear">
-        <h1 id="question">Jerry, will you be my Valentine?</h1>
-        <div class="buttons" id="btn-container">
-            <button id="yesBtn">Yes</button>
-            <button id="noBtn">No</button>
-        </div>
+<div class="card" id="mainCard">
+    <img id="statusGif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3eHh5eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L4lvBzev60_U8/giphy.gif" alt="Cute Bear">
+    <h1 id="headerText">Jerry, will you be my Valentine?</h1>
+    <div class="btn-group">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
     </div>
+</div>
 
-    <script>
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const gif = document.getElementById('status-gif');
-        const question = document.getElementById('question');
-        const container = document.getElementById('main-card');
+<script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const headerText = document.getElementById('headerText');
+    const statusGif = document.getElementById('statusGif');
+    const mainCard = document.getElementById('mainCard');
 
-        let noCount = 0;
-        const phrases = ["No", "Are you sure?", "Really sure?", "Pookie please!", "Don't do this!", "I'm gonna cry...", "You're breaking my heart!"];
+    let clickCount = 0;
+    const noMessages = [
+        "No", "Are you sure?", "Really sure?", "Pookie please", 
+        "Think again!", "Last chance!", "Surely not?", "You're heartless!"
+    ];
 
-        noBtn.addEventListener('click', () => {
-            noCount++;
-            // Change button text
-            noBtn.innerText = phrases[Math.min(noCount, phrases.length - 1)];
-            
-            // Make Yes button grow
-            const size = 1 + (noCount * 0.5);
-            yesBtn.style.transform = `scale(${size})`;
-            
-            // Randomly move No button
-            const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2);
-            const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2);
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-
-            // Change image to sad after 3 clicks
-            if (noCount === 3) {
-                gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnJueHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/OPU6wUKARA3NTIA6Ds/giphy.gif";
-            }
-        });
-
-        yesBtn.addEventListener('click', () => {
-            document.body.style.background = "#ffde59";
-            container.innerHTML = `
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3eHh5eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L4lvBzev60_U8/giphy.gif">
-                <h1>That's the best decision you ever made, Jerry! ❤️</h1>
-            `;
-        });
-    </script>
-</body>
-</html>
-
+    noBtn.addEventListener('click', () => {
+        clickCount++;
+        
+        // Change text
+        noBtn.innerText = noMessages[Math.min(clickCount, noMessages.length - 1)];
         
         // Make Yes button bigger
         const currentSize = 1 + (clickCount * 0.4);
@@ -137,4 +107,11 @@
     yesBtn.addEventListener('click', () => {
         document.body.style.backgroundColor = "#ffde59"; // Celebration yellow
         mainCard.innerHTML = `
-            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnJueHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/OPU6wUKARA3NT
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnJueHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/OPU6wUKARA3NTIA6Ds/giphy.gif" alt="Happy">
+            <h1>That's the best decision you ever made, Jerry! ❤️</h1>
+        `;
+    });
+</script>
+
+</body>
+</html>
