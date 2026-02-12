@@ -1,70 +1,56 @@
-\u003C!DOCTYPE html>
-\u003Chtml lang=\"en\">
-\u003Chead>
-    \u003Cmeta charset=\"UTF-8\">
-    \u003Cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">
-    \u003Ctitle>For Jerry ❤️\u003C/title>
-    \u003Cstyle>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Jerry ❤️</title>
+    <style>
+        * { -webkit-tap-highlight-color: transparent; }
         body { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0; 
-            background-color: #ffeef2; 
-            /\\* Subtle 'Jerry' Watermark Background \\*/
-            background-image: url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='12' fill='%23ffccd5' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30, 50, 50)'%3EJerry%3C/text%3E%3C/svg%3E\");
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            overflow: hidden; 
-            text-align: center; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            height: 100vh; margin: 0; background-color: #ffeef2; 
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' font-size='12' fill='%23ffccd5' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30, 50, 50)'%3EJerry%3C/text%3E%3C/svg%3E");
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden; text-align: center; touch-action: none;
         }
+        .gif { width: 180px; margin-bottom: 10px; border-radius: 20px; box-shadow: 0 10px 25px rgba(214, 51, 132, 0.15); }
+        h1 { color: #d63384; font-size: 1.6rem; padding: 0 30px; margin-top: 10px; }
+        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; width: 100%; position: relative; height: 120px; margin-top: 20px; }
+        #yesBtn { background-color: #28a745; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; z-index: 999; cursor: pointer; transition: all 0.2s; }
+        #noBtn { background-color: #dc3545; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; position: absolute; transition: 0.15s ease-out; touch-action: none; z-index: 1000; }
+    </style>
+</head>
+<body>
+    <img class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/K97pSdtfXSgjAsuSIn/giphy.gif">
+    <h1>Jerry will you be my valentine? ❤️</h1>
+    <div class="buttons">
+        <button id="yesBtn" onclick="nextPage()">Yes</button>
+        <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()" ontouchstart="moveButton()">No</button>
+    </div>
 
-        .gif { width: 200px; margin-bottom: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2); }
-        
-        h1 { color: #d63384; font-size: 1.8rem; padding: 0 25px; line-height: 1.4; }
-
-        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; width: 100%; position: relative; height: 150px; }
-        
-        #yesBtn { background-color: #28a745; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.15); cursor: pointer; transition: transform 0.1s; }
-        
-        #noBtn { background-color: #dc3545; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 12px; position: absolute; transition: 0.2s ease; touch-action: none; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-    \u003C/style>
-\u003C/head>
-\u003Cbody>
-    \u003Cimg class=\"gif\" src=\"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6Zmd6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/K97pSdtfXSgjAsuSIn/giphy.gif\">
-    \u003Ch1>Jerry will you be my valentine? ❤️\u003C/h1>
-    
-    \u003Cdiv class=\"buttons\">
-        \u003Cbutton id=\"yesBtn\" onclick=\"nextPage()\">Yes\u003C/button>
-        \u003Cbutton id=\"noBtn\" onmouseover=\"moveButton()\" onclick=\"moveButton()\" ontouchstart=\"moveButton()\">No\u003C/button>
-    \u003C/div>
-
-    \u003Cscript>
+    <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
             
-            // Teleport the 'No' button
-            const x = Math.random() \\* (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() \\* (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            noBtn.style.left = Math.max(padding, x) + 'px';
+            noBtn.style.top = Math.max(padding, y) + 'px';
             
-            // Make 'Yes' grow aggressively
             let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = (currentSize + 15) + 'px';
-            yesBtn.style.padding = (currentSize \\* 0.8) + 'px ' + (currentSize \\* 1.5) + 'px';
+            yesBtn.style.padding = (currentSize * 0.7) + 'px ' + (currentSize * 1.3) + 'px';
         }
 
         function nextPage() {
-            document.body.innerHTML = \\`
-                \u003Cimg class=\"gif\" src=\"https://media.giphy.com/media/UMon0WU1m6pRm/giphy.gif\">
-                \u003Ch1 style=\"color: #d63384;\">I knew you'd say yes, Jerry! ❤️\u003C/h1>
-            \\`;
-            document.body.style.backgroundColor = \"#ffc1d6\";
+            document.body.innerHTML = `
+                <img class="gif" src="https://media.giphy.com/media/UMon0WU1m6pRm/giphy.gif">
+                <h1 style="color: #d63384;">I knew you'd say yes, Jerry! ❤️</h1>
+            `;
+            document.body.style.backgroundColor = "#ffc1d6";
         }
-    \u003C/script>
-\u003C/body>
-\u003C/html>
-
+    </script>
+</body>
+</html>
