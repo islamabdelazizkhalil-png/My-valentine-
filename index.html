@@ -3,21 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Jerry</title>
-    <link rel="stylesheet" href="style.css">
+    <title>A Message for Jerry</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff0f3;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 75, 110, 0.1);
+            max-width: 450px;
+            z-index: 10;
+        }
+
+        #gif-display {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        h1 {
+            color: #ff4b6e;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 100px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        #noBtn {
+            background-color: #ff4b6e;
+            color: white;
+            position: relative;
+        }
+
+        .celebration-text {
+            font-size: 2.5rem;
+            color: #ff4b6e;
+            animation: heartBeat 1.5s infinite;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
-    <div class="container" id="main-card">
-        <div class="image-container">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3eHh5eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L4lvBzev60_U8/giphy.gif" alt="Cute GIF" id="main-gif">
-        </div>
+
+    <div class="container" id="main-container">
+        <img id="gif-display" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3eHh5eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/L4lvBzev60_U8/giphy.gif" alt="Bubu Dudu">
         <h1 id="question">Jerry, will you be my Valentine?</h1>
-        <div class="buttons">
+        <div class="btn-container" id="buttons">
             <button id="yesBtn">Yes</button>
             <button id="noBtn">No</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const question = document.getElementById('question');
+        const gif = document.getElementById('gif-display');
+        const container = document.getElementById('main-container');
+
+        let noCount = 0;
+        const messages = [
+            "No",
+            "Are you sure?",
+            "Really sure??",
+            "Think again!",
+            "Last chance!",
+            "Surely not?",
+            "You're breaking my heart ;(",
+            "I'm gonna cry...",
+            "Jerry, please!",
+            "OKAY FINE."
+        ];
+
+        noBtn.addEventListener('click', () => {
+            noCount++;
+            
+            // 1. Change the text of the "No" button
+            const messageIndex = Math.min(noCount, messages.length - 1);
+            noBtn.innerHTML = messages[messageIndex];
+
+            // 2. Make the "Yes" button grow exponentially
+            const newSize = 1 + (noCount * 0.8); 
+            yesBtn.style.transform = `scale(${newSize})`;
+            
+            // 3. Move the "No" button slightly so it's harder to click
+            const x = (Math.random() - 0.5) * 200;
+            const y = (Math.random() - 0.5) * 200;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+            // 4. Update the GIF to a sadder one as she keeps saying no
+            if (noCount ===
+                
