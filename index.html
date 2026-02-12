@@ -35,15 +35,12 @@
             const padding = 50;
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-            
             noBtn.style.left = Math.max(padding, x) + 'px';
             noBtn.style.top = Math.max(padding, y) + 'px';
-            
             let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = (currentSize + 15) + 'px';
             yesBtn.style.padding = (currentSize * 0.7) + 'px ' + (currentSize * 1.3) + 'px';
         }
-
         function nextPage() {
             document.body.innerHTML = `
                 <img class="gif" src="https://media.giphy.com/media/UMon0WU1m6pRm/giphy.gif">
