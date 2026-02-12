@@ -14,7 +14,6 @@
             background-color: #fff0f3;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
-            transition: background 0.5s;
         }
         .container {
             text-align: center;
@@ -26,32 +25,38 @@
             width: 90%;
             z-index: 10;
         }
-        img {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
+        /* Custom Heart instead of flaky GIF links */
+        .heart {
+            background-color: #ff4b6e;
+            display: inline-block;
+            height: 50px;
+            margin: 0 10px;
+            position: relative;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 50px;
+            animation: beat 1s infinite;
         }
-        h1 {
-            color: #d81b60;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+        .heart:before, .heart:after {
+            background-color: #ff4b6e;
+            border-radius: 50%;
+            content: "";
+            height: 50px;
+            position: absolute;
+            width: 50px;
         }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            min-height: 100px;
+        .heart:before { top: -25px; left: 0; }
+        .heart:after { left: 25px; top: 0; }
+
+        @keyframes beat {
+            0% { transform: scale(1) rotate(-45deg); }
+            50% { transform: scale(1.2) rotate(-45deg); }
+            100% { transform: scale(1) rotate(-45deg); }
         }
-        button {
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+
+        h1 { color: #d81b60; font-size: 1.5rem; margin: 40px 0; }
+        .buttons { display: flex; justify-content: center; align-items: center; gap: 20px; min-height: 100px; }
+        button { padding: 12px 25px; font-size: 1rem; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; transition: transform 0.2s; }
         #yesBtn { background-color: #4caf50; color: white; }
         #noBtn { background-color: #f44336; color: white; position: relative; }
     </style>
@@ -59,7 +64,9 @@
 <body>
 
     <div class="container" id="main-card">
-        <img id="status-gif" src="https://media.tenor.com/iz2_S_5r77EAAAAi/milk-and-mocha-bear.gif" alt="Cute Bears">
+        <div id="image-space">
+            <div class="heart"></div>
+        </div>
         <h1 id="question">Jerry, will you be my Valentine?</h1>
         <div class="buttons" id="btn-container">
             <button id="yesBtn">Yes</button>
@@ -70,38 +77,34 @@
     <script>
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const gif = document.getElementById('status-gif');
+        const question = document.getElementById('question');
         const container = document.getElementById('main-card');
 
         let noCount = 0;
-        const phrases = ["No", "Are you sure?", "Really sure?", "Jerry, please!", "Think again!", "You're breaking my heart!", "I'm gonna cry...", "Okay, last chance!"];
+        const phrases = ["No", "Are you sure?", "Really?", "Jerry, look at the heart!", "Don't say no!", "I'll be so sad...", "Last chance!"];
 
         noBtn.addEventListener('click', () => {
             noCount++;
             noBtn.innerText = phrases[Math.min(noCount, phrases.length - 1)];
             
-            // Make Yes button grow
-            const size = 1 + (noCount * 0.6);
+            // Yes button growth
+            const size = 1 + (noCount * 1.2); 
             yesBtn.style.transform = `scale(${size})`;
-            
-            // Move No button randomly across the whole screen
+            yesBtn.style.zIndex = "1000";
+
+            // No button teleportation
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
-
-            // Change to sad GIF after a few clicks
-            if (noCount === 3) {
-                gif.src = "https://media.tenor.com/T_SbeX-9_YAAAAAi/cry-mocha.gif";
-            }
         });
 
         yesBtn.addEventListener('click', () => {
             document.body.style.background = "#ffde59";
             container.innerHTML = `
-                <img src="https://media.tenor.com/86D12y8C39AAAAAi/milk-and-mocha.gif">
-                <h1 style="font-size: 1.8rem; color: #d81b60;">That's the best decision you ever made, Jerry! ❤️</h1>
+                <div style="font-size: 100px;">🎉</div>
+                <h1 style="font-size: 2rem;">That's the best decision you ever made, Jerry! ❤️</h1>
             `;
         });
     </script>
